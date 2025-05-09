@@ -1,0 +1,28 @@
+<div class="forget-password-container">
+    <mat-card class="forget-password-card">
+      <h1 [routerLink]="['']" class="text-center"> Hotline</h1>
+      <h2 class="title">Forgot Your Password?</h2>
+      <p class="subtitle">Enter your email and we’ll send you a code to reset your password.</p>
+  
+      <form [formGroup]="forgetPasswordForm" >
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Email Address</mat-label>
+          <input matInput placeholder="example@email.com" formControlName="email" type="email" />
+          <mat-error *ngIf="email?.invalid && (email?.dirty || email?.touched)">
+            Valid email is required.
+          </mat-error>
+        </mat-form-field>
+  
+        <button mat-raised-button color="primary"  type="button" (click)="onSubmit()" class="submit-btn" [disabled]="forgetPasswordForm.invalid">
+          Send Reset Code
+        </button>
+      </form>
+  
+      <div *ngIf="emailSent" class="success-message">
+        <mat-icon color="primary">check_circle</mat-icon>
+        Reset code has been sent to your email.
+        <a [routerLink]="['/auth/resetPass']">reset pass </a>
+      </div>
+    </mat-card>
+  </div>
+  

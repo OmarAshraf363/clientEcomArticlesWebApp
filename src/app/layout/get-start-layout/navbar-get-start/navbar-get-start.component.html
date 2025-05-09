@@ -1,0 +1,62 @@
+<header class="container-fluid bg-white shadow-sm sticky-top py-2">
+  <div class="container d-flex justify-content-between align-items-center">
+
+    <!-- Logo -->
+    <a class="navbar-brand fw-bold fs-4 text-dark" [routerLink]="['/']">
+      HotLine
+    </a>
+
+    <!-- Navigation -->
+    <ul class="navbar-nav d-flex flex-row align-items-center gap-4 m-0">
+
+      <!-- Articles -->
+      <li class="nav-item">
+        <a class="nav-link text-dark d-flex align-items-center" [routerLink]="['/home']">
+          Our Articles
+        </a>
+      </li>
+
+      <!-- Write Article -->
+      <li class="nav-item" *ngIf="isLoggedIn">
+        <a class="nav-link text-dark d-flex align-items-center" [routerLink]="['/home/articles/create']">
+          <i class="fa fa-edit me-1"></i> Write
+        </a>
+      </li>
+
+      <!-- Sign In Button -->
+      <li *ngIf="!isLoggedIn" class="nav-item">
+        <a class="btn btn-light" (click)="openLoginModal()">
+          Sign in
+        </a>
+      </li>
+
+      <!-- Get Started -->
+      <li *ngIf="!isLoggedIn" class="nav-item">
+        <a class="btn btn-dark rounded-pill px-4" [routerLink]="['/auth/register']">
+          Get Started
+        </a>
+      </li>
+
+      <!-- User Menu -->
+      <li *ngIf="isLoggedIn" class="nav-item">
+        <button mat-button [matMenuTriggerFor]="menu">
+          <i class="fa fa-user"></i>
+        </button>
+
+        <mat-menu  #menu="matMenu">
+          <ng-container *ngIf="isLoggedIn; else guestMenu">
+            <button mat-menu-item [routerLink]="['/home/me']">Profile</button>
+            <button mat-menu-item (click)="logout()">
+              <i class="fa fa-arrow-right-from-bracket me-2"></i> Logout
+            </button>
+          </ng-container>
+          <ng-template #guestMenu>
+            <button mat-menu-item (click)="openLoginModal()">Login</button>
+            <button mat-menu-item (click)="openRegisterModal()">Register</button>
+          </ng-template>
+        </mat-menu>
+      </li>
+
+    </ul>
+  </div>
+</header>

@@ -1,0 +1,11 @@
+.hero-section {
+    min-height: calc(100vh - 110px); /* leave space for header */
+    padding: 60px 0;
+    background: #f8f9fa;
+  }
+  
+  .hero-img {
+    max-height: 400px;
+    object-fit: cover;
+  }
+  

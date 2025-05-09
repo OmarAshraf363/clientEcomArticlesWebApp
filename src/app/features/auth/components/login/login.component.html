@@ -1,0 +1,23 @@
+<div class="login-container container">
+    <div class="form-container">
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <h1 class="text-center">Welcome back</h1>
+        <p>Log in your account</p>
+  
+        <mat-form-field class="form-group" appearance="outline" style="width: 100%;">
+          <mat-label>Email</mat-label>
+          <input matInput type="email" formControlName="email" placeholder="Enter your email" required>
+        </mat-form-field>
+  
+        <mat-form-field class="form-group" appearance="outline" style="width: 100%;">
+          <mat-label>Password</mat-label>
+          <input matInput type="password" formControlName="password" placeholder="Enter your password" required>
+        </mat-form-field>
+  
+        <button type="submit" class="btn btn-dark rounded-3" [disabled]="loginForm.invalid">Login</button>
+  
+        <small class="text-center">Forgot your password? <a [routerLink]="['/auth/forgetPass']">Reset it here</a></small>
+      </form>
+    </div>
+  </div>
+  

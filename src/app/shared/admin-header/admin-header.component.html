@@ -1,0 +1,64 @@
+<section class="all-content">
+    <div class="sid-nav" [ngClass]="{'toggle':isToggele}">
+        <div class="logo-in-nav">
+            <h3 *ngIf="!isToggele" class="logo">
+                HotLine
+           
+            </h3>
+            <span ><i (click)="toggeleView()" class="fa fa-solid fa-bars"></i></span>
+        </div>
+        <p *ngIf="!isToggele" >Navigation</p>
+        <div *ngIf="!isToggele"  class="block-nav">
+            <ul class="nav nav-pills flex-column">
+                <li class="nav-item active">
+                    <a href="" class="nav-link">
+                        <i class="fa fa-home"></i>
+                        DashBoard </a>
+                </li>
+                <li class="nav-item">
+                    <a href="" class="nav-link">
+                        <i class="fa fa-book"></i>
+                        Categories </a>
+                </li>
+                <li class="nav-item">
+                    <a href="" class="nav-link">
+                        <i class="fa  fa-bolt"></i>     
+                           Articles </a>
+                </li>
+                <li class="nav-item">
+                    <a href="" class="nav-link">
+                        <i class="fa fa-solid fa-comment"></i>
+                        Comments</a>
+                </li>
+                <li class="nav-item">
+                    <a href="" class="nav-link">
+                        <i class="fa fa-solid fa-thumbs-up"></i>
+                        Likes</a>
+                </li>
+                <li class="nav-item">
+                   
+
+                    <a href="" class="nav-link"> 
+                        <i class=" fa fa-neuter"></i>
+                        Article rows</a>
+                </li>
+                <li class="nav-item">
+                    <a href="" class="nav-link"> 
+                       Helo {{userData.displayName}}
+                    </a>
+
+                </li>
+                <li class="nav-item">
+                    <a href="" class="nav-link"> 
+                        <i class="fa fa-user"></i>
+                        Users</a>
+                </li>
+            </ul>
+        </div>
+    
+    </div>
+    <div class="">
+
+    </div>
+
+</section>

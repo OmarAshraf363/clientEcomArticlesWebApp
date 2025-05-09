@@ -1,0 +1,37 @@
+<div class="reset-password-container">
+    <mat-card class="reset-card">
+      <h2 class="title">Reset Your Password</h2>
+  
+      <form [formGroup]="resetPasswordForm" (ngSubmit)="onSubmit()">
+  
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Email</mat-label>
+          <input matInput placeholder="Enter your email" formControlName="email" />
+          <mat-error *ngIf="resetPasswordForm.get('email')?.touched && resetPasswordForm.get('email')?.invalid">
+            Valid email is required
+          </mat-error>
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Reset Code</mat-label>
+          <input matInput placeholder="Enter reset code from email" formControlName="token" />
+          <mat-error *ngIf="resetPasswordForm.get('token')?.touched && resetPasswordForm.get('token')?.invalid">
+            Reset code is required
+          </mat-error>
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>New Password</mat-label>
+          <input matInput type="password" placeholder="Enter new password" formControlName="newPassword" />
+          <mat-error *ngIf="resetPasswordForm.get('newPassword')?.touched && resetPasswordForm.get('newPassword')?.invalid">
+            Password is required and must be at least 6 characters
+          </mat-error>
+        </mat-form-field>
+  
+        <button mat-raised-button color="primary" class="submit-btn" type="submit" [disabled]="resetPasswordForm.invalid">
+          Reset Password
+        </button>
+      </form>
+    </mat-card>
+  </div>
+  

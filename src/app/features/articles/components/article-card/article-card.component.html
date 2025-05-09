@@ -1,0 +1,40 @@
+<div class="article-card">
+    <div [routerLink]="['/home/article', article.id]" class="article-card-header">
+        <div class="author-Image">
+            <img [src]="" alt="">
+            <p class="auth-name">{{article.userName}}</p>
+        </div>
+
+    </div>
+    <div [routerLink]="['/home/article', article.id]" class="article-card-body ">
+        <div class="w-75">
+
+            <p>{{article.title}}</p>
+            <span [innerHTML]="article.description"></span>
+        </div>
+        <div class="article-main-img">
+            <img [src]="imageUrl+article.baseImageUrl" alt="">
+        </div>
+    </div>
+
+    <div class="article-card-actions">
+        <strong>
+            <i class="fa fa-calendar"></i>
+            {{article.createdAt}}
+        </strong>
+        <p>
+            <i class="fa fa-thumbs-up"></i>
+            {{article.likes}}
+        </p>
+        <span>
+            <i class="fa fa-comments"></i>
+
+            {{article.comments}}
+        </span>
+       
+        <i  *ngIf="!articleIsSave " (click)="saveArticle(article.id)" matTooltip="Read it later" class="save fa-regular fa-bookmark"></i>
+        <i  *ngIf="articleIsSave " (click)="UnSaveArticle(article.id)" matTooltip="Read it later" class="save fa-solid fa-bookmark"></i>
+
+    </div>
+
+</div>

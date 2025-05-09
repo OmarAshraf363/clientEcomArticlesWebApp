@@ -1,0 +1,40 @@
+<!-- create-comment.component.html -->
+<div class="create-comment-container ">
+ <div class="head d-flex align-items-center mb-3 justify-content-between">
+   <h2>Responses ({{allArticlesComment.length}})</h2>
+   <i class="fa  fa-close"></i>
+ </div>
+
+  <form (ngSubmit)="submitComment()" [formGroup]="commentForm" class="comment-form">
+    <div class="user-info d-flex align-items-center justify-content-start gap-2">
+      <img class="user-img" src="" alt="">
+      <strong > {{userData.displayName}}</strong>
+   </div>
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>{{userData.displayName}} Comment</mat-label>
+      <textarea matInput rows="5" formControlName="content" placeholder="Write your comment..."></textarea>
+      <mat-error *ngIf="commentForm.get('content')?.invalid && commentForm.get('content')?.touched">
+        Comment is required
+      </mat-error>
+    </mat-form-field>
+
+    <div class="actions">
+      <button mat-raised-button color="primary" type="submit" [disabled]="commentForm.invalid">
+        Submit
+      </button>
+      <button mat-button type="button" (click)="closeDialog()">
+        Cancel
+      </button>
+    </div>
+  </form>
+</div>
+<div *ngIf="allArticlesComment.length > 0; else noComments" class="comments-list">
+  <div *ngFor="let comment of allArticlesComment" class="comment-item mat-elevation-z1">
+    <p class="comment-content">{{ comment.content }}</p>
+    <small class="comment-author"> {{ comment.user.userName }}</small>
+  </div>
+</div>
+
+<ng-template #noComments>
+  <p class="no-comments-text">No comments yet. Be the first to comment!</p>
+</ng-template>

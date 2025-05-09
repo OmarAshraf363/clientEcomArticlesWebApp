@@ -1,0 +1,52 @@
+.register-container {
+    max-width: 600px;
+    margin:3rem auto;
+    padding: 2rem;
+    border-radius: 12px;
+    background-color: #eee;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width:100%;
+  
+    h2 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+  
+    .image-upload {
+      text-align: center;
+      margin-bottom: 1rem;
+  
+      .avatar {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        object-fit: cover;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+        border: 2px solid #ccc;
+  
+        &:hover {
+          transform: scale(1.05);
+          border-color: #3f51b5;
+        }
+      }
+  
+      small {
+        display: block;
+        margin-top: 0.5rem;
+        color: gray;
+      }
+    }
+  
+    .full-width {
+      width: 100%;
+      margin-bottom: 1rem;
+    }
+  
+    button {
+      width: 100%;
+      padding: 0.75rem;
+      font-weight: bold;
+    }
+  }
+  

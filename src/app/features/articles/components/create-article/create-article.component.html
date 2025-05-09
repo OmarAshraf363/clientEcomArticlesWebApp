@@ -1,0 +1,94 @@
+<div class="create-article-container container-fluid p-5 bg-light min-vh-100">
+
+  <div class="draft-header mb-4 text-center">
+    <h2 class="fw-bold">📝 Create a New Article</h2>
+    <p class="text-muted">Draft your ideas and organize your article flexibly!</p>
+  </div>
+
+  <form [formGroup]="articleForm" (ngSubmit)="onSubmit()" class="article-form">
+
+    <!-- Title -->
+    <mat-form-field appearance="outline" class="full-width mb-4">
+      <mat-label>Article Title</mat-label>
+      <input matInput formControlName="title" placeholder="Enter your article title...">
+    </mat-form-field>
+
+    <!-- Description -->
+    <div class="form-group mb-4">
+      <label class="form-label fw-bold">🖋️ Article Description</label>
+      <ngx-editor-menu [editor]="editor"></ngx-editor-menu>
+      <ngx-editor
+        [editor]="editor"
+        formControlName="description"
+        class="article-desc"
+        placeholder="Write your description here...">
+      </ngx-editor>
+    </div>
+
+    <!-- Cover Image -->
+    <div class="form-group mb-4">
+      <label class="form-label fw-bold">🖼️ Upload Cover Image</label>
+      <input type="file" class="form-control" (change)="onCoverImageSelected($event)">
+    </div>
+
+    <div class="text-end mb-5">
+      <button type="submit" [disabled]="articleForm.invalid" class="btn btn-dark">
+        💾 Save main article and add row article later
+      </button>
+    </div>
+
+    <!-- Info Message -->
+    <!-- <div *ngIf="!articleIsSave" class="alert alert-warning animate-fade">
+      <strong>Note:</strong> After saving the main article parts, you can add multiple "Sections" to your article, 
+      each containing text, image, code snippets, and more!
+    </div> -->
+
+    <hr class="my-5"/>
+
+    <!-- Dynamic Rows -->
+    <div formArrayName="rows" class="dynamic-rows">
+
+      <div *ngFor="let row of articleRows.controls; let i = index" [formGroupName]="i" class="row-item p-4 mb-4 shadow rounded bg-white">
+    
+        <div class="form-group mb-3">
+          <label class="form-label">📷 Row Image</label>
+          <input type="file" (change)="onRowImageSelected($event, i)" class="form-control">
+        </div>
+    
+        <div class="form-group mb-3">
+          <label class="form-label">📝 Row Text</label>
+          <ngx-editor-menu [editor]="editors[i]"></ngx-editor-menu> <!-- ربطنا الـ menu بالeditor بتاع الصف -->
+          <ngx-editor
+            [editor]="editors[i]"
+            formControlName="text"
+            class="article-desc"
+            placeholder="Write section content here...">
+          </ngx-editor>
+        </div>
+    
+        <div class="row-actions d-flex justify-content-end gap-2">
+          <button type="button" class="btn btn-danger" (click)="removeRow(i)">
+            🗑️ Remove Section
+          </button>
+        </div>
+    
+      </div>
+    
+    </div>
+    
+
+    <div class="text-center mt-4">
+      <button type="button" class="btn btn-outline-dark btn-lg" (click)="addRow()">
+        ➕ Add new row article
+      </button>
+    </div>
+
+    <div *ngIf="articleRows.length>0" class="text-end mb-5">
+      <button type="submit" [disabled]="articleForm.invalid" class="btn btn-dark">
+        💾 Save article and article row 
+      </button>
+    </div>
+
+  </form>
+
+</div>

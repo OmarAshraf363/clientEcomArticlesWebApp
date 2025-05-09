@@ -1,0 +1,78 @@
+<div class="register-container" [formGroup]="registerForm">
+  <h2>Create your account</h2>
+
+  <!-- Profile Picture Upload -->
+  <div class="image-upload">
+    <label for="imageInput">
+      <img [src]="previewImage || 'https://images.unsplash.com/photo-1740252117070-7aa2955b25f8?fm=jpg'" alt="Profile" class="avatar" />
+    </label>
+    <input id="imageInput" type="file" accept="image/*" hidden (change)="onImageSelected($event)" />
+    <small>Click the image to upload</small>
+  </div>
+
+  <!-- Display Name -->
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Display Name</mat-label>
+    <input matInput formControlName="displayName" placeholder="Enter your name" />
+    <mat-error *ngIf="registerForm.get('displayName')?.hasError('required')">
+      Name is required
+    </mat-error>
+    <mat-error *ngFor="let msg of fieldErrors['DisplayName']">
+      {{ msg }}
+    </mat-error>
+  </mat-form-field>
+
+  <!-- Email -->
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Email</mat-label>
+    <input matInput type="email" formControlName="email" placeholder="Enter your email" />
+    <mat-error *ngIf="registerForm.get('email')?.hasError('required')">
+      Email is required
+    </mat-error>
+    <mat-error *ngIf="registerForm.get('email')?.hasError('email')">
+      Invalid email format
+    </mat-error>
+    <mat-error *ngFor="let msg of fieldErrors['Email']">
+      {{ msg }}
+    </mat-error>
+  </mat-form-field>
+
+  <!-- Password -->
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Password</mat-label>
+    <input matInput type="password" formControlName="password" placeholder="Enter your password" />
+    <mat-error *ngIf="registerForm.get('password')?.hasError('required')">
+      Password is required
+    </mat-error>
+    <mat-error *ngIf="registerForm.get('password')?.hasError('minlength')">
+      Password must be at least 6 characters
+    </mat-error>
+    <mat-error *ngFor="let msg of fieldErrors['Password']">
+      {{ msg }}
+    </mat-error>
+  </mat-form-field>
+
+  <!-- Confirm Password -->
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Confirm Password</mat-label>
+    <input matInput type="password" formControlName="confirmPassword" placeholder="Confirm your password" />
+    <mat-error *ngIf="registerForm.get('confirmPassword')?.hasError('required')">
+      Confirm Password is required
+    </mat-error>
+    <mat-error *ngIf="registerForm.get('confirmPassword')?.hasError('minlength')">
+      Confirm Password must be at least 6 characters
+    </mat-error>
+    <mat-error *ngIf="confirmPasswordControl?.invalid"
+        >Passwords do not match
+      </mat-error>
+  </mat-form-field>
+
+  <!-- Global error -->
+   <div class="text-xl-center full-width " *ngIf="sxErrorr" >
+
+     <span class=" text-danger">{{ sxErrorr }}</span>
+   </div>
+
+  <!-- Submit Button -->
+  <button mat-raised-button color="primary" (click)="onSubmit() " [disabled]="registerForm.invalid">Register</button>
+</div>

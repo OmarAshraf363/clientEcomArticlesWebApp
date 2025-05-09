@@ -1,0 +1,22 @@
+.card-container {
+    width: 90%;
+    max-width: 500px;
+    margin: auto;
+    padding: 24px;
+  }
+  
+  .profile-img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border: 2px solid #ccc;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  
+  .upload-label {
+    font-weight: 500;
+    display: block;
+    margin-bottom: 8px;
+  }
+  

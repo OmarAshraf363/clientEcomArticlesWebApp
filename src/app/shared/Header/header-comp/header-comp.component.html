@@ -1,0 +1,58 @@
+<header class="container-fluid ">
+    <div class="container-fluid main-container-nav ">
+        <nav class="navbar navbar-expand-lg w-100  left-side-items align-items-center ">
+            <a class="navbar-brand"> HotLine</a>
+
+            <div class="search w-25">
+                <div class="search-icon">
+                    <i class="fa-search fa"></i>
+                </div>
+                <input class="form-control  w-75"  type="text" [ngModel]="text" (input)="onChangeEle($event)" placeholder="Search">
+            </div>
+            <a [routerLink]="['admin' ]" *ngIf="isAdmin"> DahBoard</a>
+        </nav>
+        <nav class="navbar navbar-expand-lg ">
+            <ul class=" navbar-nav ">
+                <li class="nav-item">
+                    <a class="nav-link " [routerLink]="['articles/create']">
+                        <i class="fa fa-edit"></i>
+                        Write
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="" class="nav-link ">
+                        <i class="fa fa-solid fa-bell"></i>
+                    </a>
+                </li> 
+                <!-- <li *ngIf="userData.displayName" class="nav-item">
+                    <a href="" class="nav-link"> 
+                       Helo {{userData.displayName? userData.displayName : " tee"}}
+                    </a>
+
+                </li> -->
+                <li class="nav-item">
+                   
+
+                    <button mat-button [matMenuTriggerFor]="menu"> <i class="fa fa-user"></i></button>
+                    <mat-menu   #menu="matMenu">
+                        
+
+                        <ng-container *ngIf="isLoggedIn" >
+
+                            <button [routerLink]="['me']" mat-menu-item>Profile</button>
+                            <button (click)="logout()" mat-menu-item>  
+                                <i class="fa fa-solid fa-arrow-right-from-bracket"></i> 
+                                Logout</button>
+                        </ng-container>
+                        <ng-container *ngIf="!isLoggedIn">
+
+                            <button (click)="openLoginModal()" mat-menu-item>Login</button>
+                            <button mat-menu-item>Register</button>
+                        </ng-container>
+                    </mat-menu>
+                </li>
+            </ul>
+        </nav>
+
+    </div>
+</header>

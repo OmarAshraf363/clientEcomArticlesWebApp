@@ -1,0 +1,16 @@
+.categories-container{
+  margin-block:0.5rem;
+  padding-inline: 30px;
+  border-bottom: 1px solid #eee;
+}
+nav{
+  padding-bottom: 0;
+}
+.nav-link{
+  cursor: pointer;
+  color: #6b6b6b;
+  transition: 0.3;
+}
+.active{
+  border-bottom: 2px solid #242424;
+}

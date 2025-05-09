@@ -1,0 +1,49 @@
+<mat-card class="mat-elevation-z3 card-container" [formGroup]="updateForm">
+    <h2 class="text-center mb-4">Edit Profile</h2>
+  
+    <!-- Divider -->
+    <mat-divider class="mb-4"></mat-divider>
+  
+    <!-- Profile Picture Preview -->
+    <div class="text-center mb-4">
+      <img
+        [src]="previewImage || imageUrl + userData.picImage"
+        alt="Profile"
+        class="profile-img"
+        (click)="triggerFileInput()"
+      />
+      <input
+        type="file"
+        id="profileImage"
+        accept="image/*"
+        #fileInput
+        (change)="onImageSelected($event)"
+        style="display: none;"
+      />
+    </div>
+  
+    <!-- Display Name Field -->
+    <mat-form-field appearance="outline" class="w-100 mb-3">
+      <mat-label>Display Name</mat-label>
+      <input
+        matInput
+        formControlName="displayName"
+        placeholder="Enter new display name"
+      />
+      <mat-error *ngIf="updateForm.get('displayName')?.invalid && updateForm.get('displayName')?.touched">
+        Display name is required.
+      </mat-error>
+    </mat-form-field>
+  
+    <!-- Save Button -->
+    <button
+      mat-flat-button
+      color="primary"
+      class="w-100"
+      (click)="saveChanges()"
+      [disabled]="updateForm.invalid"
+    >
+      Save Changes
+    </button>
+  </mat-card>
+  

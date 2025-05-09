@@ -57,7 +57,10 @@
               }
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/font-awesome/css/font-awesome.css"
+
             ],
             "scripts": [],
             "server": "src/main.server.ts",
@@ -128,5 +131,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }
