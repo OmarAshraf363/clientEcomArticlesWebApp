@@ -27,11 +27,15 @@ export class ActiveLinkDirective {
         return;
       }
 
-      // if (realEle.classList.contains('active')) {
-      //   this.render.removeClass(this.ele.nativeElement, 'active');
-      // } else {
-      //   this.render.addClass(this.ele.nativeElement, 'active');
-      // }
+      if (realEle.classList.contains('active')) {
+                document.querySelector('.active')?.classList.remove('active')
+
+        this.render.removeClass(this.ele.nativeElement, 'active');
+      } else {
+                document.querySelector('.active')?.classList.remove('active')
+
+        this.render.addClass(this.ele.nativeElement, 'active');
+      }
     }
 
 }

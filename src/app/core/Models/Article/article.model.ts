@@ -11,6 +11,7 @@ export interface Article{
    likes:number;
    comments:number
    articleRows?: ArticleRow[];
+   userImage:string
 
    
 }

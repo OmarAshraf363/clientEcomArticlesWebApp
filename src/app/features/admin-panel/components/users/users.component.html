@@ -1,0 +1,46 @@
+<div class="users-container">
+    <h2>Manage Users <span *ngIf="loading" class="spinner"></span></h2>
+    <input [(ngModel)]="searchText" name="search" type="text" (input)="onSearchChange()" placeholder="Search title..."
+        class="form-input" />
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Avatar</th>
+                <th>Username</th>
+                <th>Display Name</th>
+                <th>Email</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr  *ngFor="let user of users; let i = index" (click)="setIdToGetUser(user.id)">
+                <td>{{ i + 1 }}</td>
+                <td>
+                    <img *ngIf="user.picImage" [src]="imgUrl+user.picImage" alt="avatar" class="avatar" />
+                </td>
+                <td>{{ user.userName }}</td>
+                <td>{{ user.displayName }}</td>
+                <td>{{ user.email }}</td>
+                <td>
+                    <span [class.locked]="user.locked">
+                        {{ user.locked ? 'Locked' : 'Active' }}
+                    </span>
+                </td>
+                <td>
+                    <button (click)="toggleLock(user)" [disabled]="loading" [ngClass]="user.locked ? 'unlock' : 'lock'">
+                        {{ user.locked ? 'Unlock' : 'Lock' }}
+                    </button>
+
+                </td>
+            </tr>
+            <tr *ngIf="users.length==0">
+                <td class="text-center" colspan="7">
+                    Not found users match <small class=" text-primary">{{searchText}}</small>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <p class="count">Total users: {{ totalCount }}</p>
+</div>

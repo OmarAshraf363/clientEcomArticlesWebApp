@@ -1,0 +1,63 @@
+<div class="manage-articles p-6 rounded-2xl shadow-lg space-y-6">
+  <h2 class="text-2xl font-semibold text-gray-800 border-b pb-3">Manage Articles</h2>
+
+  <!-- Filters -->
+  <form #filterForm="ngForm" (ngSubmit)="onFilter()" class="grid grid-cols-1 md:grid-cols-4 gap-4">
+    <input
+      [(ngModel)]="searachText"
+      name="search"
+      type="text"
+      (input)="onSearchChange($event)"
+      placeholder="Search title..."
+      class="form-input"
+    />
+
+  
+  </form>
+
+  <!-- Articles Table -->
+  <div class="overflow-x-auto">
+    <table class="table w-full text-left text-sm">
+      <thead class="bg-gray-50 text-gray-700 uppercase tracking-wider">
+        <tr>
+          <th class="px-4 py-2">Title</th>
+          <th class="px-4 py-2">Author</th>
+          <th class="px-4 py-2 text-center">Actions</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-gray-100">
+        <tr *ngFor="let article of articles" class="hover:bg-gray-50 transition">
+          <td [routerLink]="['/admin/articles',article.id]"  class="title px-4 py-2 font-medium text-gray-900">{{ article.title }}</td>
+          <td class="px-4 py-2 text-gray-600">{{ article.userName }}</td>
+          <td class="px-4 py-2 text-center space-x-2">
+            <button (click)="deleteArticle(article.id)" class="text-red-600 hover:underline">Delete</button>
+          </td>
+        </tr>
+        <tr *ngIf="articles?.length==0">
+          <td colspan="3" class="text-center">Not found articles </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Pagination -->
+  <div *ngIf="totalPages > 1" class="flex justify-between items-center pt-4 border-t">
+    <span class="text-sm text-gray-500">Page {{ pageNumber }} of {{ totalPages }}</span>
+    <div class="space-x-2">
+      <button
+        [disabled]="pageNumber === 1"
+        class="btn-pagination"
+        (click)="goToPrev()"
+      >
+        Prev
+      </button>
+      <button
+        [disabled]="pageNumber === totalPages"
+        (click)="goToNext()"
+        class="btn-pagination"
+      >
+        Next
+      </button>
+    </div>
+  </div>
+</div>

@@ -59,6 +59,12 @@ const routes: Routes = [
     path: 'admin',
     component: AdminLayoutComponent,
     canActivate: [AdminGaurd],
+    children:[
+      {
+        path:'',
+        loadChildren:()=>import('./features/admin-panel/admin-panel.module').then((m)=>m.AdminPanelModule)
+      }
+    ]
   },
   // { path: '**', component: NotFoundComponent },
   { path: '400', component: BadRequestComponent },

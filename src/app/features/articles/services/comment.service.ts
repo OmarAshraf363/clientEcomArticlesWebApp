@@ -28,9 +28,7 @@ export class CommentService {
            
         }
         deleteComment(commentId:number):Observable<any>{
-            return this.http.delete(`${this.baseUrk}/${this.modelWord}/delete-comment`, {
-                params: { commentId: commentId }
-            })
+            return this.http.delete(`${this.baseUrk}/${this.modelWord}/delete-comment/${commentId}`)
         }
         updateComment(id:number, content:string):Observable<any>{
             return this.http.put(`${this.baseUrk}/${this.modelWord}/update-comment`, {id, content});

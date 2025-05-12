@@ -1,0 +1,122 @@
+.users-container {
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+
+  h2 {
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    .spinner {
+      margin-left: 0.5rem;
+      width: 1rem;
+      height: 1rem;
+      border: 2px solid #ccc;
+      border-top-color: #333;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 0.75rem;
+
+    th, td {
+      padding: 0.75rem;
+      border: 1px solid #e2e8f0;
+      text-align: left;
+    }
+
+    thead {
+      background: #f1f5f9;
+    }
+
+    tbody tr {
+      &:nth-child(even) {
+        background: #fafbfc;
+      }
+      &:hover {
+        background: #eef2f7;
+      }
+    }
+
+    .avatar {
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+  }
+
+  .count {
+    text-align: right;
+    font-size: 0.875rem;
+    color: #555;
+  }
+
+  .locked {
+    color: #c53030;
+    font-weight: 600;
+  }
+}
+button {
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 80px;
+
+  &.lock {
+    background-color: #dc3545; // red
+    color: #fff;
+
+    &:hover:not(:disabled) {
+      background-color: #c82333;
+    }
+  }
+
+  &.unlock {
+    background-color: #28a745; // green
+    color: #fff;
+
+    &:hover:not(:disabled) {
+      background-color: #218838;
+    }
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+.form-input {
+  width: 100%;
+  max-width: 400px;
+  padding: 0.6rem 1rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+
+  &:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.25);
+  }
+
+  &::placeholder {
+    color: #aaa;
+  }
+
+  margin-bottom: 1rem;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}

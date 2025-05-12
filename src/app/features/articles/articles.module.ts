@@ -17,6 +17,8 @@ import { CtrateCommentComponent } from './components/ctrate-comment/ctrate-comme
 import { FeaturesModule } from "../features.module";
 import { CategoriesModule } from "../categories/categories.module";
 import { CategoriesSectionComponent } from '../categories/components/categories-section/categories-section.component';
+import { EditArticleComponent } from './components/edit-article/edit-article.component';
+import { EditArticleRowComponent } from './components/edit-article-row/edit-article-row.component';
 @NgModule({
   declarations: [
     ArticlesComponent,
@@ -29,6 +31,8 @@ import { CategoriesSectionComponent } from '../categories/components/categories-
     CreateFullArticlePageComponent,
     NavbarComponent,
     CtrateCommentComponent,
+    EditArticleComponent,
+    EditArticleRowComponent,
   ],
   imports: [
     CommonModule,

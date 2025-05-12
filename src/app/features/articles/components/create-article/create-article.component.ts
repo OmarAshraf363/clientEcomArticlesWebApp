@@ -2,8 +2,8 @@ import { Component, inject, OnInit, OnDestroy } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Editor } from 'ngx-editor';
 import { Router } from '@angular/router';
-import { ArticleService } from '../../services/article.service';
 import { ArticleRowService } from '../../services/articleRow.service';
+import { ArticleService } from '../../../../core/service/article.service';
 
 @Component({
   selector: 'app-create-article',
@@ -93,6 +93,7 @@ export class CreateArticleComponent implements OnInit, OnDestroy {
           this.submitArticleRows(); // Only after article created
           this.articleIsSave = true;
         }
+        this.router.navigate([`/home/article/${this.articleId}`])
       },
       error: (error) => {
         console.error('Error creating article:', error);

@@ -1,10 +1,10 @@
-import { Component, OnChanges, OnDestroy, OnInit } from '@angular/core';
+import { Component, inject, OnChanges, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ArticleRowService } from '../../services/articleRow.service';
-import { CreateArticleRow } from '../../../../core/Models/ArticleRow/ArticleRow.model';
-import { ActivatedRoute, Route } from '@angular/router';
-import { Router } from 'express';
+
 import { Editor } from 'ngx-editor';
+import { Router } from '@angular/router';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-created-article-row',
@@ -15,8 +15,9 @@ export class CreatedArticleRowComponent implements OnInit  {
   editor!:Editor
   articleRowForm!:FormGroup
   articleId!:number
+    private dialogRef = inject(MatDialogRef<CreatedArticleRowComponent>);
   
-  constructor(private fb :FormBuilder,private route:ActivatedRoute,private articleRowService:ArticleRowService){
+  constructor(private fb :FormBuilder,private router:Router,private articleRowService:ArticleRowService){
 
     this.articleRowForm=this.fb.group({
       text:['',Validators.required],
@@ -25,7 +26,9 @@ export class CreatedArticleRowComponent implements OnInit  {
   }
 
   ngOnInit(): void {
-   this.articleId= Number (this.route.snapshot.paramMap.get('id'))
+const sub= this.articleRowService.articleId$.subscribe(res=>{
+this.articleId=res
+   })
    this.editor=new Editor()
   
   }
@@ -53,7 +56,12 @@ export class CreatedArticleRowComponent implements OnInit  {
     // console.log(this.articleRowForm.get('image')?.value)
     //call add api 
     this.articleRowService.CreateArticleRow(formData).subscribe({
-      next:(data)=>{console.log(data)},
+      next:(data)=>{
+                this.dialogRef.close(true);
+
+        this.router.navigate(['/article',this.articleId])
+        
+      },
       error:(err=>console.log(err))
     })
   }

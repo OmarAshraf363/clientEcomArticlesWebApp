@@ -1,0 +1,39 @@
+<div class="user-details-container" *ngIf="userDetailsResponse">
+  <div class="profile-section">
+    <img
+      [src]="imageUrl+userDetailsResponse.userInfo.picImage || 'assets/default-avatar.png'"
+      class="profile-image"
+      alt="User profile picture"
+    />
+    <div class="profile-info">
+      <h2>{{ userDetailsResponse.userInfo.displayName }}</h2>
+      <p>{{ userDetailsResponse.userInfo.userName }}</p>
+      <span class="user-id">ID: {{ userDetailsResponse.userInfo.id }}</span>
+    </div>
+  </div>
+
+  <div class="articles-section">
+    <h3>User Articles ({{ userDetailsResponse.data.length || 0 }})</h3>
+
+    <div *ngIf="userDetailsResponse.data?.length; else noArticles" class="articles-grid">
+      <div *ngFor="let article of userDetailsResponse.data" [routerLink]="['/admin/articles',article.id]" class="article-card">
+        <h4>{{ article.title }}</h4>
+        <p [innerHTML]="(article.description | slice:0:100) + '...'" class="summary">
+    
+        </p>
+        <div class="article-meta">
+          <span>👍 {{ article.likes || 0 }}</span>
+          <span>💬 {{ article.comments || 0 }}</span>
+        </div>
+      </div>
+    </div>
+    <div class="handel my-2 d-flex justify-content-start gap-3 align-items-center">
+      <button (click)="openEditProfile()" class="btn btn-dark px-3 py-1">Edit Profile</button>
+      <button class="btn btn-danger px-3 py-1">Delete user</button>
+    </div>
+
+    <ng-template #noArticles>
+      <p class="no-articles">This user has no articles yet.</p>
+    </ng-template>
+  </div>
+</div>

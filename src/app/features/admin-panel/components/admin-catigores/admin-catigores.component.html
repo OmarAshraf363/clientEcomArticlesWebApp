@@ -1,0 +1,52 @@
+<div class="admin-categories p-6 rounded-xl shadow-md bg-white space-y-6">
+  <h2 class="text-2xl font-semibold">Manage Categories</h2>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-4">
+    <input
+      formControlName="name"
+      type="text"
+      class="border p-2 rounded w-full"
+      placeholder="Enter category name"
+    />
+     <input
+      formControlName="description"
+      type="text"
+      class="border p-2 rounded w-full"
+      placeholder="Enter category description"
+    />
+    <button
+      class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+      type="submit"
+    >
+      {{ editMode ? 'Update' : 'Add' }}
+    </button>
+    <button
+      type="button"
+      (click)="resetForm()"
+      class="text-gray-500 hover:underline"
+      *ngIf="editMode"
+    >
+      Cancel
+    </button>
+  </form>
+
+  <table class="w-full border-collapse border border-gray-200 mt-6">
+    <thead>
+      <tr class="bg-gray-100">
+        <th class="p-2 border">Name</th>
+        <th class="p-2 border">Created At</th>
+        <th class="p-2 border">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let category of categories" class="hover:bg-gray-50">
+        <td class="p-2 border">{{ category.name }}</td>
+        <td class="p-2 border">{{ category.createdAt | date }}</td>
+        <td class="p-2 border space-x-2">
+          <button class="text-blue-500 hover:underline" (click)="editCategory(category)">Edit</button>
+          <button class="text-red-500 hover:underline" (click)="deleteCategory(category.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

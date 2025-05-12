@@ -43,7 +43,7 @@
           <i class="fa fa-user"></i>
         </button>
 
-        <mat-menu  #menu="matMenu">
+        <mat-menu #menu="matMenu">
           <ng-container *ngIf="isLoggedIn; else guestMenu">
             <button mat-menu-item [routerLink]="['/home/me']">Profile</button>
             <button mat-menu-item (click)="logout()">
@@ -56,7 +56,10 @@
           </ng-template>
         </mat-menu>
       </li>
-
+      <li *ngIf="isAdmin" class="nav-item">
+        <a class="btn btn-dark rounded-pill px-4" [routerLink]="['/admin']">
+          Admin panel </a>
+      </li>
     </ul>
   </div>
 </header>

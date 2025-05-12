@@ -21,7 +21,7 @@ const routes: Routes = [
   },
  
   {
-      path:'create/:id' , component:CreatedArticleRowComponent
+      path:'create-row/:id' , component:CreatedArticleRowComponent
   },
   {
     path:'articles/create',

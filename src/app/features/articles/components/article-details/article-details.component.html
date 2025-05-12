@@ -10,55 +10,55 @@
     </div>
     <div class="content-authr">
 
-      <img [src]="article.baseImageUrl" alt="">
+      <img [src]=" imagesUrl+article.userImage" alt="">
       <div>
         <p class="auth-name">{{article.userName}}</p>
 
         <strong>
           <i class="fa fa-calendar"></i>
-          {{article.createdAt}}
+          {{article.createdAt |date}}
         </strong>
       </div>
 
     </div>
 
     <div class="content-actions d-flex align-items-center justify-content-between">
-  
+
       <!-- Left side (Like + Comment) -->
       <div class="d-flex align-items-center gap-3">
         <div class="d-flex align-items-center gap-1">
-          <i (click)="toggeleLike()" 
-             [class.fa-solid]="isLiked" 
-             [class.fa-regular]="!isLiked" 
-             class="fa fa-thumbs-up">
+          <i (click)="toggeleLike()" [class.fa-solid]="isLiked" [class.fa-regular]="!isLiked" class="fa fa-thumbs-up">
           </i>
           <span>{{ article.likes }}</span>
         </div>
-    
+
         <div class="d-flex align-items-center gap-1">
           <i (click)="openCreateComment()" class="fa fa-comments"></i>
           <span>{{ article.comments }}</span>
         </div>
       </div>
-    
+
       <!-- Right side (Handle article) -->
-      <div *ngIf="article.userName==userData.userName" class="handel-my-article">
+      <div *ngIf="article.userName==userData.userName||isAdmin=='Admin'" class="handel-my-article">
         <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
           <mat-icon>more_vert</mat-icon>
         </button>
-    
+
         <mat-menu #menu="matMenu">
-          <button mat-menu-item>
-            <i class="fa fa-edit" style="margin-right: 8px;"></i> Edit
+          <button (click)="addArticleRow(article.id)" mat-menu-item>
+            <i class="fa fa-plus" style="margin-right: 8px;"></i> Add article row
+          </button>
+          <button (click)="editArticle(article.id)" mat-menu-item>
+            <i class="fa fa-edit" style="margin-right: 8px;"></i> Edit article
           </button>
           <button (click)="deletArticle()" mat-menu-item>
-            <i class="fa fa-trash" style="margin-right: 8px;"></i> Delete
+            <i class="fa fa-trash" style="margin-right: 8px;"></i> Delete article
           </button>
         </mat-menu>
       </div>
-    
+
     </div>
-    
+
 
 
 
@@ -79,6 +79,9 @@
         <div *ngIf="row.image" class="text-center w-100">
           <img [src]="imagesUrl+row.image" alt="Row Image" class="img-fluid  rounded shadow" />
         </div>
+                <button *ngIf="article.userName==userData.userName||isAdmin=='Admin'" (click)="editArticleRow(row.id)" class="btn btn-dark m-3">Edit article row</button>
+
+        <button *ngIf="article.userName==userData.userName||isAdmin=='Admin'" (click)="deletArticleRow(row.id)" class="btn btn-danger">Delete article row</button>
       </div>
     </div>
   </div>

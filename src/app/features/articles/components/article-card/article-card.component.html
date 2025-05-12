@@ -1,7 +1,7 @@
 <div class="article-card">
     <div [routerLink]="['/home/article', article.id]" class="article-card-header">
         <div class="author-Image">
-            <img [src]="" alt="">
+            <img [src]="imageUrl+'/'+ article.userImage" alt="">
             <p class="auth-name">{{article.userName}}</p>
         </div>
 
@@ -20,7 +20,7 @@
     <div class="article-card-actions">
         <strong>
             <i class="fa fa-calendar"></i>
-            {{article.createdAt}}
+            {{article.createdAt |date}}
         </strong>
         <p>
             <i class="fa fa-thumbs-up"></i>

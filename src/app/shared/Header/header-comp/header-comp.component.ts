@@ -5,8 +5,8 @@ import { ModalService } from '../../../core/service/modal.service';
 import { AuthService } from '../../../core/service/auth.service';
 import { userInfo } from '../../../core/Models/Auth/auth';
 import { Router } from '@angular/router';
-import { ArticleService } from '../../../features/articles/services/article.service';
 import { ArticleParam } from '../../../core/Models/articleParam';
+import { ArticleService } from '../../../core/service/article.service';
 
 
 @Component({

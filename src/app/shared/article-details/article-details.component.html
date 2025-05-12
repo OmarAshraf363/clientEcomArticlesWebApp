@@ -1,0 +1,86 @@
+<div class="article-container container">
+  <div class="article-content">
+    <div class="content-header">
+      <p>{{article.title}}</p>
+    </div>
+    <div class="content-body">
+      <div class="content-body-desc">
+        <p [innerHtml]="article.description">{{article.description}}</p>
+      </div>
+    </div>
+    <div class="content-authr">
+
+      <img [src]="article.baseImageUrl" alt="">
+      <div>
+        <p class="auth-name">{{article.userName}}</p>
+
+        <strong>
+          <i class="fa fa-calendar"></i>
+          {{article.createdAt}}
+        </strong>
+      </div>
+
+    </div>
+
+    <div class="content-actions d-flex align-items-center justify-content-between">
+  
+      <!-- Left side (Like + Comment) -->
+      <div class="d-flex align-items-center gap-3">
+        <div class="d-flex align-items-center gap-1">
+          <i (click)="toggeleLike()" 
+             [class.fa-solid]="isLiked" 
+             [class.fa-regular]="!isLiked" 
+             class="fa fa-thumbs-up">
+          </i>
+          <span>{{ article.likes }}</span>
+        </div>
+    
+        <div class="d-flex align-items-center gap-1">
+          <i (click)="openCreateComment()" class="fa fa-comments"></i>
+          <span>{{ article.comments }}</span>
+        </div>
+      </div>
+    
+      <!-- Right side (Handle article) -->
+      <div *ngIf="article.userName==userData.userName" class="handel-my-article">
+        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+    
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item>
+            <i class="fa fa-edit" style="margin-right: 8px;"></i> Edit
+          </button>
+          <button (click)="deletArticle()" mat-menu-item>
+            <i class="fa fa-trash" style="margin-right: 8px;"></i> Delete
+          </button>
+        </mat-menu>
+      </div>
+    
+    </div>
+    
+
+
+
+    <div class="content-base-image">
+      <img [src]="imagesUrl+article.baseImageUrl" alt="">
+    </div>
+
+
+
+
+
+    <!-- Article Rows -->
+    <div class="article-rows mt-5">
+      <div *ngFor="let row of article.articleRows" class="mb-5 p-4 border rounded bg-light shadow-sm">
+        <div [innerHTML]="row.text" class="mb-3 fs-6" style="line-height: 1.8;"></div>
+
+        <!-- If there's an image in the row -->
+        <div *ngIf="row.image" class="text-center w-100">
+          <img [src]="imagesUrl+row.image" alt="Row Image" class="img-fluid  rounded shadow" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,40 @@
+<div class="container px-5 py-4">
+  <h2>Edit Article</h2>
+
+  <form [formGroup]="form" (ngSubmit)="submit()" class="form-container">
+    
+    <div class="form-group mb-3">
+      <label class="form-label fw-bold">📝 Title</label>
+      <input matInput formControlName="title" class="form-control" placeholder="Enter article title" />
+      <mat-error *ngIf="form.controls['title'].invalid">Title is required</mat-error>
+    </div>
+
+    <div class="form-group mb-3">
+      <label class="form-label fw-bold">🖊️ Content</label>
+      <ngx-editor-menu [editor]="editor"></ngx-editor-menu>
+      <ngx-editor [editor]="editor" rows="6" formControlName="description"></ngx-editor>
+      <mat-error *ngIf="form.controls['description'].invalid">Description is required</mat-error>
+    </div>
+
+    <div class="image-upload mt-3">
+      <label class="form-label fw-bold">🖼️ Image</label>
+
+      <input type="file" id="imageInput" (change)="onImageSelected($event)" accept="image/*" hidden />
+
+      <label for="imageInput" class="d-inline-block cursor-pointer">
+        <img
+          [src]="imagePreviewUrl ? imagePreviewUrl : imageUrl + articleData.baseImageUrl"
+          alt="Click to change image"
+          class="img-fluid rounded shadow border"
+          style="max-height: 300px; cursor: pointer;"
+        />
+      </label>
+    </div>
+
+    <div class="actions mt-4">
+      <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid || loading">
+        {{ loading ? 'Saving...' : 'Save Changes' }}
+      </button>
+    </div>
+  </form>
+</div>

@@ -1,9 +1,11 @@
 import { EventEmitter, Injectable } from '@angular/core';
-import { Article } from '../../../core/Models/Article/article.model';
+
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { environment } from '../../../../enviroments/env';
-import { ArticleParam } from '../../../core/Models/articleParam';
+import { Article } from '../Models/Article/article.model';
+import { environment } from '../../../enviroments/env';
+import { ArticleParam } from '../Models/articleParam';
+
 @Injectable({
   providedIn: 'root', // Makes the service available application-wide
 })
@@ -12,6 +14,12 @@ export class ArticleService {
   url = environment.apiUrl;
   modelWord = environment.modelWords.article;
 
+
+  public articleId=new BehaviorSubject<number>(0)
+  public articleId$=this.articleId.asObservable()
+
+  public articleRowId=new BehaviorSubject<number>(0)
+  public articleRowId$=this.articleRowId.asObservable()
 
 
     public searchText=new BehaviorSubject<string>("")
@@ -86,7 +94,13 @@ export class ArticleService {
   }
 
 
+deleteArticleRow(id:number):Observable<any>{
 
+        return this.http.delete(
+      `${this.url}/${this.modelWord}/delete-article-row/${id}`
+    );
+
+}
 
 
   getById(id: number): Observable<any> {
@@ -108,5 +122,18 @@ export class ArticleService {
   setInonArticleClicked(articleId: number) {
     this.onArticleClicked.emit(articleId);
     console.log(`iam arrive in service and id id ${articleId}`);
+  }
+
+getArticleRowById(id:number):Observable<any>{
+      return this.http.get(`${this.url}/${this.modelWord}/get-article-row-by-id/${id}`);
+
+}
+
+  // updates Part
+  updateArticleRow(updateArticleRow:FormData):Observable<any>{
+    return this.http.put( `${this.url}/${this.modelWord}/update-article-row`,updateArticleRow)
+  }
+   updateArticle(updateArticle:FormData):Observable<any>{
+    return this.http.put( `${this.url}/${this.modelWord}/update-article`,updateArticle)
   }
 }

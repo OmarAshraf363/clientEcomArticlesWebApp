@@ -10,6 +10,7 @@ export interface RegisterRec{
     password:string
 }
 export class userInfo{
+    id:string=""
     isLogged:boolean=false;
     displayName:string="";
     fullName:string="";
@@ -18,6 +19,7 @@ export class userInfo{
     phoneNumber:string="";
     picImage:string="";
     role:string="";
+    locked:boolean=false
 }
 
 export interface ResetPassword{

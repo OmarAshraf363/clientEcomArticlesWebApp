@@ -1,5 +1,4 @@
 import { Component, inject, Input, OnDestroy, OnInit } from '@angular/core';
-import { ArticleService } from '../../services/article.service';
 import { __importDefault } from 'tslib';
 import { Article } from '../../../../core/Models/Article/article.model';
 import { Route, Router } from '@angular/router';
@@ -7,6 +6,7 @@ import { AuthService } from '../../../../core/service/auth.service';
 import { ArticleParam } from '../../../../core/Models/articleParam';
 import { debounceTime, distinctUntilChanged, Subscription } from 'rxjs';
 import { unsubscribe } from 'diagnostics_channel';
+import { ArticleService } from '../../../../core/service/article.service';
 
 @Component({
   selector: 'app-article-list',

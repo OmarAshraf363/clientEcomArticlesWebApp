@@ -13,6 +13,7 @@ import { RegisterComponent } from '../../../features/auth/components/register/re
 export class NavbarGetStartComponent implements OnInit {
   private readonly authService = inject(AuthService);
   isLoggedIn = false;
+  isAdmin=false
 
   constructor(
     private modalService: ModalService,
@@ -24,6 +25,13 @@ export class NavbarGetStartComponent implements OnInit {
       this.isLoggedIn = res;
       console.log('isLoggedIn:', this.isLoggedIn);
     });
+    this.authService.userRole$.subscribe(res=>{
+      if(res=="Admin"){
+        this.isAdmin=true
+      }else{
+        this.isAdmin=false
+      }
+    })
   }
 
   openLoginModal(): void {

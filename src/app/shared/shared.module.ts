@@ -22,6 +22,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { BadRequestComponent } from './bad-request/bad-request.component';
 import { FeaturesModule } from '../features/features.module';
 import { ActiveLinkDirective } from './dirictives/active-link.directive';
+import { ArticleDetailsComponent } from './article-details/article-details.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { ActiveLinkDirective } from './dirictives/active-link.directive';
     LoaderComponent,
     NotFoundComponent,
     BadRequestComponent,
-    ActiveLinkDirective
+    ActiveLinkDirective,
+    ArticleDetailsComponent
   ],
   imports: [
     CommonModule,
@@ -78,7 +80,9 @@ import { ActiveLinkDirective } from './dirictives/active-link.directive';
     LoaderComponent,
     MatProgressSpinnerModule,
     ActiveLinkDirective,
-    FormsModule 
+    FormsModule ,
+    ArticleDetailsComponent 
+
   ]
 })
 export class SharedModule { }

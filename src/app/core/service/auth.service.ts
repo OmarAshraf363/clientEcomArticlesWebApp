@@ -21,7 +21,7 @@ userData$=this.userData.asObservable()
   // isLogedInProcess$ = this.isLoggedIn.asObservable();
 
 userRole: BehaviorSubject<string> = new BehaviorSubject<string>("");
-  // userRole$ = this.userRole.asObservable();
+   userRole$ = this.userRole.asObservable();
  
 
   getUserData(): Observable<userInfo> {

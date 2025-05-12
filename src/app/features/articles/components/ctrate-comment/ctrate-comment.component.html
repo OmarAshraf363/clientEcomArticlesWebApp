@@ -1,40 +1,64 @@
-<!-- create-comment.component.html -->
-<div class="create-comment-container ">
- <div class="head d-flex align-items-center mb-3 justify-content-between">
-   <h2>Responses ({{allArticlesComment.length}})</h2>
-   <i class="fa  fa-close"></i>
- </div>
+<div class="create-comment-container container py-4 px-3">
+  <!-- Header -->
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h4 class="mb-0 text-dark fw-bold" *ngIf="allArticlesComment">💬 Responses ({{ allArticlesComment.length }})</h4>
+    <button class="btn btn-light border-0" (click)="closeDialog()" title="Close">
+      <i class="fa fa-times fa-lg text-danger"></i>
+    </button>
+  </div>
 
-  <form (ngSubmit)="submitComment()" [formGroup]="commentForm" class="comment-form">
-    <div class="user-info d-flex align-items-center justify-content-start gap-2">
-      <img class="user-img" src="" alt="">
-      <strong > {{userData.displayName}}</strong>
-   </div>
-    <mat-form-field appearance="outline" class="full-width">
-      <mat-label>{{userData.displayName}} Comment</mat-label>
-      <textarea matInput rows="5" formControlName="content" placeholder="Write your comment..."></textarea>
+  <!-- Comment Form -->
+  <form [formGroup]="commentForm" (ngSubmit)="submitComment()" class="mb-4">
+    <div class="d-flex align-items-center gap-3 mb-3">
+      <img
+        class="rounded-circle border"
+        [src]="imageUel + userData.picImage"
+        alt="User Image"
+        width="50"
+        height="50"
+        style="object-fit: cover"
+      />
+      <strong class="fs-6 text-dark">{{ userData.displayName }}</strong>
+    </div>
+
+    <mat-form-field appearance="outline" class="w-100">
+      <mat-label>Write a comment as {{ userData.displayName }}</mat-label>
+      <textarea matInput formControlName="content" rows="4" placeholder="Share your thoughts..."></textarea>
       <mat-error *ngIf="commentForm.get('content')?.invalid && commentForm.get('content')?.touched">
         Comment is required
       </mat-error>
     </mat-form-field>
 
-    <div class="actions">
+    <div class="d-flex justify-content-end mt-3 gap-2">
+      <button mat-button type="button" (click)="closeDialog()">Cancel</button>
       <button mat-raised-button color="primary" type="submit" [disabled]="commentForm.invalid">
-        Submit
-      </button>
-      <button mat-button type="button" (click)="closeDialog()">
-        Cancel
+        Post Comment
       </button>
     </div>
   </form>
-</div>
-<div *ngIf="allArticlesComment.length > 0; else noComments" class="comments-list">
-  <div *ngFor="let comment of allArticlesComment" class="comment-item mat-elevation-z1">
-    <p class="comment-content">{{ comment.content }}</p>
-    <small class="comment-author"> {{ comment.user.userName }}</small>
-  </div>
-</div>
 
-<ng-template #noComments>
-  <p class="no-comments-text">No comments yet. Be the first to comment!</p>
-</ng-template>
+  <!-- Comment List -->
+  <div *ngIf="count > 0; else noComments" class="comments-list">
+    <div
+      *ngFor="let comment of allArticlesComment"
+      class="comment-item p-3 mb-3 rounded shadow-sm bg-white border-start border-4 border-primary"
+    >
+      <p class="mb-1 text-dark">{{ comment.content }}</p>
+      <div class="d-flex justify-content-between align-items-center">
+        <small class="text-muted">👤 {{ comment.user.userName }}</small>
+        <button
+          *ngIf="comment.user?.displayName === userData.displayName"
+          class="btn btn-sm btn-outline-danger"
+          (click)="deleteComment(comment.id)"
+        >
+          🗑️ Delete
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- No Comments Placeholder -->
+  <ng-template #noComments>
+    <p class="text-center text-muted mt-4">No comments yet. Be the first to comment! 📝</p>
+  </ng-template>
+</div>

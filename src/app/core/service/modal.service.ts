@@ -9,14 +9,14 @@ export class ModalService {
 
   open(component: any, config: any = {}) {
     return this.dialog.open(component, {
-      width: '600px',
-      height:'480px',
-      disableClose: false,
-      autoFocus: true,
+      width:'600px',
+      height:'500px' ,
+      maxWidth:'100%',
+      
+      ...config,
 
-    ...config,
 
-     
+      
     });
   }
 

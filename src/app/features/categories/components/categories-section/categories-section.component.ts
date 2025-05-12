@@ -2,7 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { Category } from '../../../../core/Models/Category/category.model';
 import { CategoryService } from '../../service/category.service';
 import { Article } from '../../../../core/Models/Article/article.model';
-import { ArticleService } from '../../../articles/services/article.service';
+import { ArticleService } from '../../../../core/service/article.service';
 
 @Component({
   selector: 'app-categories-section',

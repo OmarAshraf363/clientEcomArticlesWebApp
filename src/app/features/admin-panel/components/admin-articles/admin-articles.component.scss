@@ -1,0 +1,146 @@
+.manage-articles {
+  border-radius: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  padding: 1.5rem;
+}
+
+.manage-articles h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1f2937;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+/* Input & Select */
+.manage-articles input[type="text"],
+.manage-articles select {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  outline: none;
+  transition: border 0.2s ease, box-shadow 0.2s ease;
+  margin: 5px;
+}
+
+.manage-articles input[type="text"]:focus,
+.manage-articles select:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.3);
+}
+
+/* Buttons */
+.manage-articles .btn-primary {
+  background-color: #2563eb;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin: 5px;
+}
+
+.manage-articles .btn-primary:hover {
+  background-color: #1d4ed8;
+}
+
+.manage-articles .btn-secondary {
+  color: #6b7280;
+  background: none;
+  border: none;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.manage-articles .btn-secondary:hover {
+  color: #111827;
+}
+
+/* Table */
+.manage-articles .table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+.manage-articles .table th,
+.manage-articles .table td {
+  padding: 0.5rem 1rem;
+  border: 1px solid #e5e7eb;
+}
+
+.manage-articles .table thead {
+  background-color: #f9fafb;
+  text-transform: uppercase;
+  color: #374151;
+  letter-spacing: 0.05em;
+}
+
+.manage-articles .table tbody tr:hover {
+  background-color: #f3f4f6;
+  transition: background-color 0.2s ease;
+}
+
+/* Action Buttons */
+.manage-articles .table button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  transition: color 0.2s ease;
+  margin: 5px;
+}
+
+.manage-articles .table .text-blue-600 {
+  color: #2563eb;
+}
+
+.manage-articles .table .text-blue-600:hover {
+  text-decoration: underline;
+}
+
+.manage-articles .table .text-red-600 {
+  color: #dc2626;
+}
+
+.manage-articles .table .text-red-600:hover {
+  text-decoration: underline;
+}
+.title{
+  cursor: pointer;
+}
+/* Pagination */
+.manage-articles .pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 1rem;
+  border-top: 1px solid #e5e7eb;
+  margin: 5px;
+}
+
+.manage-articles .pagination span {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.manage-articles .btn-pagination {
+  padding: 0.25rem 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  background-color: white;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin:5px 5px 0 0;
+}
+
+.manage-articles .btn-pagination:hover:not(:disabled) {
+  background-color: #f3f4f6;
+}
+
+.manage-articles .btn-pagination:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

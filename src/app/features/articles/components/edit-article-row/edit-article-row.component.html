@@ -1,0 +1,41 @@
+<div class="container px-5 py-5">
+  <h2>Edit Article Row</h2>
+
+  <form [formGroup]="form" (ngSubmit)="submit()" class="form-container">
+    
+    <div class="form-group mb-3">
+      <label class="form-label fw-bold">🖊️ Article Text</label>
+      <ngx-editor-menu [editor]="editor"> </ngx-editor-menu>
+
+      <ngx-editor matInput [editor]="editor" rows="4" formControlName="text">
+      </ngx-editor>
+          <mat-error *ngIf="form.controls['text'].invalid">Text is required</mat-error>
+
+    </div>
+
+  <div class="image-upload mt-3">
+  <label class="form-label fw-bold">🖼️ Image</label>
+
+  <!-- مخفي -->
+  <input type="file" id="imageInput" (change)="onImageSelected($event)" accept="image/*" hidden />
+
+  <!-- الصورة القديمة أو المعاينة الجديدة كـ زر -->
+  <label for="imageInput" class="d-inline-block cursor-pointer">
+    <img
+      [src]="imagePreviewUrl ? imagePreviewUrl : imageUrl + articleRowData.image"
+      alt="Click to change"
+      class="img-fluid rounded shadow border"
+      style="max-height: 300px; cursor: pointer;"
+    />
+  </label>
+</div>
+
+
+    <div class="actions">
+      <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid || loading">
+        {{ loading ? 'Saving...' : 'Save Changes' }}
+      </button>
+    </div>
+  </form>
+
+</div>

@@ -1,0 +1,19 @@
+section.d-flex {
+  height: 100vh; /* أو 100% من الشاشة */
+  overflow: hidden;
+}
+
+.admin-header {
+   /* أو حسب عرض الهيدر */
+  flex-shrink: 0;
+  width: max-content;
+}
+
+.dynamic-content {
+  flex-grow: 1;
+  overflow-y: auto;
+  height: 100vh;
+  padding: 1rem; /* اختياري للتنسيق */
+    width: max-content;
+
+}

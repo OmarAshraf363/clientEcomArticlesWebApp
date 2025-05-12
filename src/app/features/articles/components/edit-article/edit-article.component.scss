@@ -1,0 +1,9 @@
+.image-upload {
+  img {
+    transition: 0.3s ease;
+    &:hover {
+      opacity: 0.8;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    }
+  }
+}
