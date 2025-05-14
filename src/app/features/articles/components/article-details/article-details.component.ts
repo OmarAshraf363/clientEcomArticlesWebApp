@@ -38,7 +38,7 @@ export class ArticleDetailsComponent implements OnInit {
 
   constructor(
     private articleService: ArticleService,
-        private articleRowService: ArticleRowService,
+    private articleRowService: ArticleRowService,
 
     private route: ActivatedRoute
   ) {}
@@ -46,7 +46,7 @@ export class ArticleDetailsComponent implements OnInit {
   articleId!: number;
   imagesUrl: string = environment.imagesURL;
   userData!: userInfo;
-  isAdmin=this.authService.userRole.getValue()
+  isAdmin = this.authService.userRole.getValue();
   @ViewChild('likeIcon') like!: ElementRef;
   isLiked: boolean = false;
   ngOnInit(): void {
@@ -75,21 +75,27 @@ export class ArticleDetailsComponent implements OnInit {
       },
     });
   }
-addArticleRow(id:number){
-        this.articleRowService.articleId.next(id);
-   this.modalService.open(CreatedArticleRowComponent, {
-          maxWidth: '100%',
-      width:'1000px',
-      height:'80vh',
-     });
-}
-  editArticle(id:number){
-        this.articleService.articleId.next(id);
- this.modalService.open(EditArticleComponent, {
-          maxWidth: '100%',
-      width:'1000px',
-      height:'80vh',
-     });
+  addArticleRow(id: number) {
+    this.articleRowService.articleId.next(id);
+    const openModal = this.modalService.open(CreatedArticleRowComponent, {
+      maxWidth: '100%',
+      width: '1000px',
+      height: '80vh',
+    });
+    openModal.afterClosed().subscribe(() => {
+      this.getArticleById(this.article.id);
+    });
+  }
+  editArticle(id: number) {
+    this.articleService.articleId.next(id);
+   const modal= this.modalService.open(EditArticleComponent, {
+      maxWidth: '100%',
+      width: '1000px',
+      height: '80vh',
+    });
+      modal.afterClosed().subscribe(() => {
+      this.getArticleById(this.article.id);
+    });
   }
 
   deletArticleRow(id: number) {
@@ -104,12 +110,16 @@ addArticleRow(id:number){
 
   editArticleRow(id: number) {
     this.articleService.articleRowId.next(id);
-   
-      this.modalService.open(EditArticleRowComponent, {
-          maxWidth: '100%',
-      width:'1000px',
-      height:'80vh',
-     });
+
+  const modal=  this.modalService.open(EditArticleRowComponent, {
+      maxWidth: '100%',
+      width: '1000px',
+      height: '80vh',
+    });
+     modal.afterClosed().subscribe(() => {
+      this.getArticleById(this.article.id);
+    });
+    
   }
 
   getArticleById(id: number) {
@@ -124,17 +134,18 @@ addArticleRow(id:number){
     });
   }
 
-
-
   openCreateComment() {
     this.commentService.articleId.next(this.articleId);
-    this.modalService.open(CtrateCommentComponent, {
+    const modal=this.modalService.open(CtrateCommentComponent, {
       width: '500px',
       height: '100vh',
       position: {
         top: '0',
         right: '0',
       },
+    });
+      modal.afterClosed().subscribe(() => {
+      this.getArticleById(this.article.id);
     });
   }
 

@@ -92,7 +92,7 @@ export class EditArticleRowComponent implements OnDestroy,OnInit {
       next: () => {
         console.log("Done Edited article row ")
         this.modal.closeAll()
-        this.router.navigate(['/article',this.articleRowData.articleId])
+        this.router.navigate(['/home/article',this.articleRowData.articleId])
         
       },
       error: (err) => (console.log(err)),

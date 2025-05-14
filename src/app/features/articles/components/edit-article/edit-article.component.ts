@@ -97,7 +97,7 @@ export class EditArticleComponent implements OnInit, OnDestroy {
       next: () => {
         this.loading = false;
         this.dialogRef.close(true);
-        this.router.navigate(['/article',this.articleData.id])
+        this.router.navigate(['/home/article',this.articleData.id])
       },
       error: () => {
         this.loading = false;

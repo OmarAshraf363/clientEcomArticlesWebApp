@@ -103,6 +103,7 @@ export class CtrateCommentComponent implements OnInit, OnDestroy {
 
   closeDialog() {
     this.dialogRef.close();
+    
   }
   ngOnDestroy(): void {
     this.subs.unsubscribe();

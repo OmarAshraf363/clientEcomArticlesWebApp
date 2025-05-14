@@ -8,7 +8,7 @@
   </app-article-card>
 </div>
 
-<nav *ngIf="totalPages > 1" aria-label="Page navigation example" class="d-flex justify-content-center">
+<nav *ngIf="totalPages > 1 && listOfArticle.length>=3" aria-label="Page navigation example" class="d-flex justify-content-center">
   <ul class="pagination pagination-rounded">
     <li class="page-item" [class.disabled]="pageNumber === 1">
       <a class="page-link" (click)="previousPage()" aria-label="Previous">

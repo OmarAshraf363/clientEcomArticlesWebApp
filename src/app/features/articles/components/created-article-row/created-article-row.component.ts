@@ -59,7 +59,7 @@ this.articleId=res
       next:(data)=>{
                 this.dialogRef.close(true);
 
-        this.router.navigate(['/article',this.articleId])
+        this.router.navigate(['/home/article',this.articleId])
         
       },
       error:(err=>console.log(err))

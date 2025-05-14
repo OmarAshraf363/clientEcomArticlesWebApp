@@ -60,6 +60,7 @@ export class ArticleListComponent implements OnInit,OnDestroy {
   loadArticles(data?: ArticleParam) {
     this.articleService.getAllArticles(data).subscribe({
       next: (response) => {
+        
         this.listOfArticle = response.data;
         this.totalCount = response.totalCount;
       },
