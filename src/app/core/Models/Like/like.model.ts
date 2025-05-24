@@ -6,5 +6,7 @@ export interface Like{
 }
 export interface LikeResponse{
     count:number;
+    isLike:boolean;
+    at:Date;
     user:userInfo;
 }

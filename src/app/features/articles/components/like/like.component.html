@@ -1,0 +1,30 @@
+<div class="like-wrapper">
+          <span class="like-count">Total Likes: {{ likes.length }}</span>
+
+  <div *ngFor="let like of likes" class="like-card">
+    <div class="user-info">
+      <img
+        [src]="imageUrl+like.user.picImage || 'assets/images/default-user.png'"
+        alt="User Image"
+        class="user-avatar"
+      />
+      <div class="user-details">
+        <h2 class="user-name">{{ like.user.displayName }}</h2>
+        <!-- <p class="user-email">{{ like.user.email }}</p>
+        <p class="user-phone">{{ like.user.phoneNumber }}</p> -->
+        <p class="user-phone">{{ like.at | date }}</p>
+      </div>
+    </div>
+
+    <!-- <div class="like-meta">
+      <span
+        class="like-status"
+        [ngClass]="{ 'liked': like.isLike, 'not-liked': !like.isLike }"
+      >
+        {{ like.isLike ? '👍 Liked' : '👎 Not Liked' }}
+      </span>
+
+      <span class="like-count">Total Likes: {{ like.count }}</span>
+    </div> -->
+  </div>
+</div>

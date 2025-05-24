@@ -23,6 +23,11 @@ import { BadRequestComponent } from './bad-request/bad-request.component';
 import { FeaturesModule } from '../features/features.module';
 import { ActiveLinkDirective } from './dirictives/active-link.directive';
 import { ArticleDetailsComponent } from './article-details/article-details.component';
+import { UserCardComponent } from './user-card/user-card.component';
+import { AnotherUserProfileComponent } from './another-user-profile/another-user-profile.component';
+import { UserInfoComponent } from './another-user-profile/user-info/user-info.component';
+import { ArticlesContainerComponent } from './another-user-profile/articles-container/articles-container.component';
+import { ArticleCardSharedComponent } from './article-card-shared/article-card-shared.component';
 
 
 @NgModule({
@@ -33,7 +38,14 @@ import { ArticleDetailsComponent } from './article-details/article-details.compo
     NotFoundComponent,
     BadRequestComponent,
     ActiveLinkDirective,
-    ArticleDetailsComponent
+    ArticleDetailsComponent,
+    UserCardComponent,
+    AnotherUserProfileComponent,
+    UserInfoComponent,
+    ArticlesContainerComponent,
+    ArticleCardSharedComponent,
+    
+
   ],
   imports: [
     CommonModule,
@@ -81,7 +93,10 @@ import { ArticleDetailsComponent } from './article-details/article-details.compo
     MatProgressSpinnerModule,
     ActiveLinkDirective,
     FormsModule ,
-    ArticleDetailsComponent 
+    ArticleDetailsComponent ,
+    UserCardComponent,
+        UserInfoComponent,
+    ArticlesContainerComponent
 
   ]
 })

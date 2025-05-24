@@ -4,6 +4,7 @@ import { BehaviorSubject, map, Observable, tap } from 'rxjs';
 import { environment } from '../../../enviroments/env';
 import { checkAuth, userInfo } from '../Models/Auth/auth';
 import { emit } from 'process';
+import { UserFollowerReq } from '../Models/user/userFlowerReq';
 export interface resData {
 
 }

@@ -19,6 +19,7 @@ import { CategoriesModule } from "../categories/categories.module";
 import { CategoriesSectionComponent } from '../categories/components/categories-section/categories-section.component';
 import { EditArticleComponent } from './components/edit-article/edit-article.component';
 import { EditArticleRowComponent } from './components/edit-article-row/edit-article-row.component';
+import { LikeComponent } from './components/like/like.component';
 @NgModule({
   declarations: [
     ArticlesComponent,
@@ -33,6 +34,7 @@ import { EditArticleRowComponent } from './components/edit-article-row/edit-arti
     CtrateCommentComponent,
     EditArticleComponent,
     EditArticleRowComponent,
+    LikeComponent,
   ],
   imports: [
     CommonModule,

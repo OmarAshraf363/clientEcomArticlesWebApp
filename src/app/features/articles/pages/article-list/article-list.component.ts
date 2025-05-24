@@ -13,11 +13,8 @@ import { ArticleService } from '../../../../core/service/article.service';
   templateUrl: './article-list.component.html',
   styleUrl: './article-list.component.scss',
 })
-export class ArticleListComponent implements OnInit,OnDestroy {
-  subscribtions:Subscription[]=[]
-
-
-
+export class ArticleListComponent implements OnInit, OnDestroy {
+  subscribtions: Subscription[] = [];
 
   listOfArticle!: Article[];
   totalCount: number = 0;
@@ -32,19 +29,22 @@ export class ArticleListComponent implements OnInit,OnDestroy {
   constructor(private articleService: ArticleService, private route: Router) {}
   ngOnInit(): void {
     this.whenCatIdChange();
+    this.whenSearchChange()
+    this.loadArticles()
+   
 
-  let sub2=  this.articleService.searchText
+  }
+  whenSearchChange(){
+     let sub2 = this.articleService.searchText
       .pipe(debounceTime(1000), distinctUntilChanged())
       .subscribe((searchText) => {
         this.searchText = searchText;
-        const articleParam = this.prepareArticleParam();
 
-        this.loadArticles(articleParam);
+        this.loadArticles();
       });
+          this.subscribtions.push(sub2);
 
-      this.subscribtions.push(sub2)
   }
-
   prepareArticleParam(): ArticleParam {
     let articleParam = new ArticleParam();
     articleParam.search = this.searchText;
@@ -57,10 +57,10 @@ export class ArticleListComponent implements OnInit,OnDestroy {
   }
 
   //load articles
-  loadArticles(data?: ArticleParam) {
-    this.articleService.getAllArticles(data).subscribe({
+  loadArticles() {
+    const params = this.prepareArticleParam();
+    this.articleService.getAllArticles(params).subscribe({
       next: (response) => {
-        
         this.listOfArticle = response.data;
         this.totalCount = response.totalCount;
       },
@@ -78,7 +78,7 @@ export class ArticleListComponent implements OnInit,OnDestroy {
   goToPage(page: number) {
     if (page !== this.pageNumber) {
       this.pageNumber = page;
-      this.ngOnInit();
+      this.loadArticles();
     }
   }
 
@@ -89,29 +89,28 @@ export class ArticleListComponent implements OnInit,OnDestroy {
   previousPage() {
     if (this.pageNumber > 1) {
       this.pageNumber--;
-      this.ngOnInit();
+      this.loadArticles();
     }
   }
 
   nextPage() {
     if (this.pageNumber < this.totalPages) {
       this.pageNumber++;
-      this.ngOnInit();
+      this.loadArticles();
     }
   }
 
   whenCatIdChange(): void {
-   let sub= this.articleService.catId$.subscribe((data) => {
+    let sub = this.articleService.catId$.subscribe((data) => {
       this.categoryId = data;
-      const articleParam = this.prepareArticleParam();
-      this.loadArticles(articleParam);
-      
+      this.pageNumber=1
+           this.loadArticles();
+
     });
-    this.subscribtions.push(sub)
+    this.subscribtions.push(sub);
   }
   ngOnDestroy(): void {
-    console.log("Un Sub",this.subscribtions)
-    this.subscribtions.forEach(sub => sub.unsubscribe());
-
+    console.log('Un Sub', this.subscribtions);
+    this.subscribtions.forEach((sub) => sub.unsubscribe());
   }
 }

@@ -1,22 +1,22 @@
-import { Component, inject, Input, OnDestroy, OnInit } from '@angular/core';
-import { Article } from '../../../../core/Models/Article/article.model';
-import { environment } from '../../../../../enviroments/env';
-import { userInfo } from '../../../../core/Models/Auth/auth';
-import { AuthService } from '../../../../core/service/auth.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { Component, inject, Input } from '@angular/core';
+import { Article } from '../../core/Models/Article/article.model';
+import { environment } from '../../../enviroments/env';
+import { AuthService } from '../../core/service/auth.service';
 import { Subscription } from 'rxjs';
-import { ArticleService } from '../../../../core/service/article.service';
-import { GlobalUsersService } from '../../../../core/service/user.service';
+import { userInfo } from '../../core/Models/Auth/auth';
+import { Router } from '@angular/router';
+import { GlobalUsersService } from '../../core/service/user.service';
+import { ArticleService } from '../../core/service/article.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
-  selector: 'app-article-card',
-  templateUrl: './article-card.component.html',
-  styleUrl: './article-card.component.scss',
+  selector: 'app-article-card-shared',
+  templateUrl: './article-card-shared.component.html',
+  styleUrl: './article-card-shared.component.scss'
 })
-export class ArticleCardComponent implements OnInit, OnDestroy {
-  private _snakebar = inject(MatSnackBar);
+export class ArticleCardSharedComponent {
+ private _snakebar = inject(MatSnackBar);
   private readonly articleService: ArticleService = inject(ArticleService);
     private readonly userService: GlobalUsersService = inject(GlobalUsersService);
 

@@ -1,0 +1,81 @@
+.like-wrapper {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  max-width: 700px;
+  margin: 0 auto;
+      width: 100%;
+}
+
+.like-card {
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  padding: 1.5rem;
+      width: 100%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.3s ease;
+
+  &:hover {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  .user-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #d1d5db;
+  }
+
+  .user-details {
+    .user-name {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #1f2937;
+    }
+
+    .user-email {
+      font-size: 0.9rem;
+      color: #6b7280;
+    }
+
+    .user-phone {
+      font-size: 0.8rem;
+      color: #9ca3af;
+    }
+  }
+}
+
+.like-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1.2rem;
+
+  .like-status {
+    font-size: 0.9rem;
+    font-weight: 500;
+
+    &.liked {
+      color: #16a34a;
+    }
+
+    &.not-liked {
+      color: #dc2626;
+    }
+  }
+
+  .like-count {
+    font-size: 0.85rem;
+    color: #3b82f6;
+    font-weight: bold;
+  }
+}

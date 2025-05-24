@@ -4,7 +4,7 @@ import { getUserByIdResponse } from '../../../../../core/Models/user/user-detail
 import { Subscription } from 'rxjs';
 import { environment } from '../../../../../../enviroments/env';
 import { ModalService } from '../../../../../core/service/modal.service';
-import { UserInfoComponent } from '../../../../auth/components/my-info/user-info/user-info.component';
+import { UserInfoComponent } from '../../../../../shared/another-user-profile/user-info/user-info.component';
 
 @Component({
   selector: 'app-user-details',

@@ -12,8 +12,8 @@ export class ModalService {
       width:'600px',
       height:'500px' ,
       maxWidth:'100%',
-      
       ...config,
+      
 
 
       

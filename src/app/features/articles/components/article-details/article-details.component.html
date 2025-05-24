@@ -29,7 +29,7 @@
         <div class="d-flex align-items-center gap-1">
           <i (click)="toggeleLike()" [class.fa-solid]="isLiked" [class.fa-regular]="!isLiked" class="fa fa-thumbs-up">
           </i>
-          <span>{{ article.likes }}</span>
+          <span (click)="getArticleLikes(article.id)">{{ article.likes }}</span>
         </div>
 
         <div class="d-flex align-items-center gap-1">

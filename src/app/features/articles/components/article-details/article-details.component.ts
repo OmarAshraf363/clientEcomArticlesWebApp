@@ -21,6 +21,7 @@ import { EditArticleRowComponent } from '../edit-article-row/edit-article-row.co
 import { MatDialog } from '@angular/material/dialog';
 import { EditArticleComponent } from '../edit-article/edit-article.component';
 import { CreatedArticleRowComponent } from '../created-article-row/created-article-row.component';
+import { LikeComponent } from '../like/like.component';
 
 @Component({
   selector: 'article-details',
@@ -88,12 +89,12 @@ export class ArticleDetailsComponent implements OnInit {
   }
   editArticle(id: number) {
     this.articleService.articleId.next(id);
-   const modal= this.modalService.open(EditArticleComponent, {
+    const modal = this.modalService.open(EditArticleComponent, {
       maxWidth: '100%',
       width: '1000px',
       height: '80vh',
     });
-      modal.afterClosed().subscribe(() => {
+    modal.afterClosed().subscribe(() => {
       this.getArticleById(this.article.id);
     });
   }
@@ -111,15 +112,14 @@ export class ArticleDetailsComponent implements OnInit {
   editArticleRow(id: number) {
     this.articleService.articleRowId.next(id);
 
-  const modal=  this.modalService.open(EditArticleRowComponent, {
+    const modal = this.modalService.open(EditArticleRowComponent, {
       maxWidth: '100%',
       width: '1000px',
       height: '80vh',
     });
-     modal.afterClosed().subscribe(() => {
+    modal.afterClosed().subscribe(() => {
       this.getArticleById(this.article.id);
     });
-    
   }
 
   getArticleById(id: number) {
@@ -136,7 +136,7 @@ export class ArticleDetailsComponent implements OnInit {
 
   openCreateComment() {
     this.commentService.articleId.next(this.articleId);
-    const modal=this.modalService.open(CtrateCommentComponent, {
+    const modal = this.modalService.open(CtrateCommentComponent, {
       width: '500px',
       height: '100vh',
       position: {
@@ -144,7 +144,7 @@ export class ArticleDetailsComponent implements OnInit {
         right: '0',
       },
     });
-      modal.afterClosed().subscribe(() => {
+    modal.afterClosed().subscribe(() => {
       this.getArticleById(this.article.id);
     });
   }
@@ -156,6 +156,18 @@ export class ArticleDetailsComponent implements OnInit {
         this.router.navigate(['home']);
       },
       error: (err) => console.log(err),
+    });
+  }
+
+  getArticleLikes(id: number) {
+    this.likeService.articleId.next(this.articleId);
+    this.modalService.open(LikeComponent, {
+      width: '400px',
+      height: '100vh',
+      position: {
+        top: '0',
+        left: '0',
+      },
     });
   }
 }

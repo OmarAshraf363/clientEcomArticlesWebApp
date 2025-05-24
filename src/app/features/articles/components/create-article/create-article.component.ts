@@ -4,6 +4,8 @@ import { Editor } from 'ngx-editor';
 import { Router } from '@angular/router';
 import { ArticleRowService } from '../../services/articleRow.service';
 import { ArticleService } from '../../../../core/service/article.service';
+import { readFile } from 'node:fs';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-create-article',
@@ -17,6 +19,9 @@ export class CreateArticleComponent implements OnInit, OnDestroy {
   editor!:Editor
   editors: Editor[] = [];
   articleIsSave = false;
+  previewImage: string | ArrayBuffer | null = null;
+prevRowImages: (string | ArrayBuffer | null)[] = [];
+  isSubmitting = false;
 
   private readonly router = inject(Router);
   private readonly fb = inject(FormBuilder);
@@ -64,6 +69,15 @@ export class CreateArticleComponent implements OnInit, OnDestroy {
     if (input.files?.length) {
       this.selectedImage = input.files[0];
     }
+    const reader = new FileReader();
+      reader.onload = () => {
+        this.previewImage = reader.result;
+      };
+            reader.readAsDataURL(this.selectedImage);
+
+  }
+  removeImage(){
+    this.previewImage=null
   }
 
   onRowImageSelected(event: Event, index: number): void {
@@ -71,12 +85,34 @@ export class CreateArticleComponent implements OnInit, OnDestroy {
     if (input.files?.length) {
       this.articleRows.at(index).patchValue({ image: input.files[0] });
     }
+    const reader = new FileReader();
+    reader.onload = () => {
+      if (!this.prevRowImages) {
+        this.prevRowImages = [];
+      }
+      if (reader.result !== null) {
+        this.prevRowImages[index] = reader.result;
+      }
+    };
+    if (input.files && input.files[0]) {
+      reader.readAsDataURL(input.files[0]);
+    }
+    
+  }
+
+  removeRowImage(index: number): void {
+    this.articleRows.at(index).patchValue({ image: null });
+    if (this.prevRowImages) {
+      this.prevRowImages[index] = null;
+    }
   }
 
   onSubmit(): void {
-    if (this.articleForm.invalid || !this.selectedImage) {
+    if (this.articleForm.invalid || !this.selectedImage || this.isSubmitting) {
       return;
     }
+
+    this.isSubmitting = true;
 
     const formData = new FormData();
     formData.append('title', this.articleForm.get('title')?.value);
@@ -84,42 +120,42 @@ export class CreateArticleComponent implements OnInit, OnDestroy {
     formData.append('baseImageUrl', this.selectedImage);
 
     this.articleService.createArticle(formData).subscribe({
-      next: (result) => {
-        this.articleId = result.id;
-        console.log('Article created with ID:', result.id);
-
-        if(this.articleRows.length>0){
-
-          this.submitArticleRows(); // Only after article created
-          this.articleIsSave = true;
+      next: (res) => {
+        this.articleId = res.id;
+        if (this.articleRows.length > 0) {
+          this.submitArticleRows();
+        } else {
+          this.navigateAfterSuccess();
         }
-        this.router.navigate([`/home/article/${this.articleId}`])
       },
-      error: (error) => {
-        console.error('Error creating article:', error);
+      error: (err) => {
+        this.isSubmitting = false;
+        console.error('Error creating article:', err);
       }
     });
   }
 
   private submitArticleRows(): void {
-    if (this.articleRows.length === 0 || !this.articleId) {
-      return;
-    }
-
-    this.articleRows.controls.forEach((rowGroup, index) => {
-      const formData = new FormData();
-      formData.append('articleId', this.articleId.toString());
-      formData.append('text', rowGroup.get('text')?.value);
-
-      const image = rowGroup.get('image')?.value;
-      if (image) {
-        formData.append('image', image);
-      }
-
-      this.articleRowService.CreateArticleRow(formData).subscribe({
-        next: (res) => console.log(`Row ${index + 1} added successfully`, res),
-        error: (err) => console.error(`Error adding row ${index + 1}:`, err)
-      });
+    const requests = this.articleRows.controls.map((group) => {
+      const rowFormData = new FormData();
+      rowFormData.append('articleId', this.articleId.toString());
+      rowFormData.append('text', group.get('text')?.value);
+      const image = group.get('image')?.value;
+      if (image) rowFormData.append('image', image);
+      return this.articleRowService.CreateArticleRow(rowFormData);
     });
+
+    forkJoin(requests).subscribe({
+      next: () => this.navigateAfterSuccess(),
+      error: (err) => {
+        this.isSubmitting = false;
+        console.error('Error submitting article rows:', err);
+      }
+    });
+  }
+
+  private navigateAfterSuccess(): void {
+    this.isSubmitting = false;
+    this.router.navigate([`/home/article/${this.articleId}`]);
   }
 }

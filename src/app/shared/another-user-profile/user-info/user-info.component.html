@@ -1,0 +1,30 @@
+<div class="container user-info-container">
+
+   
+      <div class="image-container">
+
+        <img src="{{imageUrl}}{{userData.picImage}}" alt="">
+        <h4>{{userData.displayName}}</h4>
+      </div>
+      <div class="actions">
+        @if (userId) {
+               <a *ngIf="!loginUserIsFollowUser" (click)="onFollow(userId)" class ="edit">
+                  Follow
+              </a>
+                <a *ngIf="loginUserIsFollowUser" (click)="onFollow(userId)" class ="edit">
+                  UnFollow
+              </a>
+            }@else{
+
+              <a (click)="openEditModal()" class ="edit">
+                  Edit Profile
+              </a>
+            }
+      </div>
+        
+       
+
+
+ 
+
+</div>

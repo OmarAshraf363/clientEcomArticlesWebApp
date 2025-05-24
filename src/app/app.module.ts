@@ -29,7 +29,7 @@ import { ErrorInterceptor } from './core/interceptors/erorr-handling';
     AppRoutingModule,
     CoreModule,
     SharedModule,
-    LayoutModule,
+    LayoutModule, 
     FeaturesModule
   
     ,HttpClientModule,

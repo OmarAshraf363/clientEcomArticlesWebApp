@@ -3,5 +3,7 @@ export class ArticleParam{
     categoryId?:number;
     maxPageSize?:number
     pageSize?:number
-    pageNumber?:number
+    pageNumber?:number;
+    userId?:string=""
+
 }

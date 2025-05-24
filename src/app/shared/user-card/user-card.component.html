@@ -1,0 +1,12 @@
+
+    <div [routerLink]="['/home/users',user.userId]"  class="follower-card">
+      <img
+        [src]="imageUrl+user.followerImage || 'assets/images/default-user.png'"
+        alt="Follower Image"
+        class="follower-avatar"
+      />
+      <div class="follower-info">
+        <h3 class="follower-name">{{ user.followerName }}</h3>
+        <p class="follow-date">Followed at: {{ user.followAt | date:'mediumDate' }}</p>
+      </div>
+    </div>
